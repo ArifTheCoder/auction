@@ -1,0 +1,8 @@
+{% if searched_auction %}
+    <p>You have searched for: <strong>{{ query }}</strong></p>
+    {% for a in searched_auction %}
+        <li>Found: <a href="{% url 'auction:detail' a.id %}">{{ a.auctionTitle }}</a></li>
+    {% endfor %}
+{% else %}
+    <p>No auction matched.</p>
+{% endif %}

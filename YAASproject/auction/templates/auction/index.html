@@ -1,0 +1,16 @@
+{% if error_msg %}
+    <p><strong>{{ error_msg }}</strong></p>
+{% endif %}
+
+<form action="{% url 'auction:search_form' %}" method="get">
+    {% csrf_token %}
+    <input type="text" name="q">
+    <input type="submit" value="Search">
+</form>
+
+<h2>Auction list:</h2>
+<ul>
+    {% for auction in allAuctions %}
+    <li><a href="{% url 'auction:detail' auction.id %}">{{ auction.auctionTitle }}</a></li>
+    {% endfor %}
+</ul>
