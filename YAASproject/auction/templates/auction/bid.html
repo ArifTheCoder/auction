@@ -1,0 +1,40 @@
+{% extends 'auction/base.html' %}
+{% block title %}Bid{% endblock %}
+{% block body %}
+{% load app_filters %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {% if error_message %}
+                        <p style="color: red"><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <strong>Auction Description : </strong> {{ auction.description }}<br/>
+                     {% if auction.bidding_price %}
+                     <strong>Current Price : </strong> {{ auction.bidding_price }} EUR<br/><br/>
+                     {% else %}
+                     <strong>Current Price : </strong> {{ auction.starting_price }} EUR<br/><br/>
+                     {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="auction_revision" value="{{ auction.auction_revision }}" />
+                        {% include 'auction/template-form.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Place your bid</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+{% endblock %}
